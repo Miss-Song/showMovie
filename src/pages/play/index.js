@@ -10,19 +10,32 @@ function index() {
 	const [reviews,setReviews] = useState({
 		list: [],
 	})
+	const video = {
+		width:'80%',
+		height:'600px',
+		marginLeft: '10%',
+	}
+	const bg000 = {
+		background:'#000',
+		marginTop:'-40px'
+	}
 
 	useEffect(()=>{
-		const result_Details = getMovieDetails({
+		getMovieDetails({
 			locationId:290,
 			movieId:125805
+		}).then(res=>{
+			setMovies({
+				video:res.data.data.basic.video.url
+			})
 		})
-		// console.log(result_Details)
+		
 	},[])
 
 
 	return (
-		<div>
-			<video src=""></video>
+		<div style={bg000}>
+			<video style={video} controls src={movies.video}></video>
 		</div>
 	)
 }

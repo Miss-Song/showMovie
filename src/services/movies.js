@@ -13,7 +13,8 @@ export function getMovieDetails(params) {
     url:`https://ticket-api-m.mtime.cn/movie/detail.api?locationId=${params.locationId}&movieId=${params.movieId}`
   })
   .then(res=>{
-    console.log(res);
+    // console.log(res);
+    return res
   })
   .catch(err=>{
     console.log(err)
