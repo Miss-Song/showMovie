@@ -7,11 +7,11 @@
   overflow: hidden;
   zoom: 1;
   margin-bottom: 40px;
-  padding-left: 110px;
   border-bottom: 1px solid #e5ebe4;
 }
 .navwrap{
   border-bottom: 1px solid #e5ebe4;
+  padding-left: 110px;
 }
 .navprimary{
   width: 1040px;
