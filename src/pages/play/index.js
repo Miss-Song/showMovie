@@ -1,6 +1,5 @@
 import React ,{ useState , useEffect } from 'react'
 import { getMovieDetails , getMovieReviews} from '../../services/movies'
-// import Link from 'umi/link'
 
 
 function index() {
@@ -13,9 +12,11 @@ function index() {
 	})
 
 	useEffect(()=>{
-		// const moviesDetails = await getMovieDetails({
-			
-		// })
+		const result_Details = getMovieDetails({
+			locationId:290,
+			movieId:125805
+		})
+		// console.log(result_Details)
 	},[])
 
 
