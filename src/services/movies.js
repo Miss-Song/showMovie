@@ -1,16 +1,22 @@
-import { get } from 'axios'
+import { get,post } from 'axios'
+// import qs from 'qs'
 
-  // 当发送get请求的时候 axios需要把参数放在params属性中,
-  // params属性的值会拼接在url地址后面
+// 当发送get请求的时候 axios需要把参数放在params属性中,
+// params属性的值会拼接在url地址后面
 
 /**
  * 获取影片详情请求(个人定义)
  * @param {*} params 请求参数
  */
-
-export function getMovieDetails(params) {  
-  return get('https://ticket-api-m.mtime.cn/movie/detail.api', {              
-    params
+export function getMovieDetails(params) {
+  return post('https://api.cat-shop.penkuoer.com/api/v2/proxy', {
+    url:`https://ticket-api-m.mtime.cn/movie/detail.api?locationId=${params.locationId}&movieId=${params.movieId}`
+  })
+  .then(res=>{
+    console.log(res);
+  })
+  .catch(err=>{
+    console.log(err)
   })
 }
 
@@ -19,7 +25,13 @@ export function getMovieDetails(params) {
  * @param {*} params 请求参数
  */
 export function getMovieReviews(params){
-  return get('https://ticket-api-m.mtime.cn/movie/hotComment.api', {              
-    params
+  return post('https://api.cat-shop.penkuoer.com/api/v2/proxy', {              
+    url: `https://ticket-api-m.mtime.cn/movie/hotComment.api?movieId=${params.movieId}`
+  })
+  .then(res=>{
+    console.log(res)
+  })
+  .catch(err=>{
+    console.log(err)
   })
 }
