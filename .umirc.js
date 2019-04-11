@@ -10,7 +10,7 @@ export default {
       dynamicImport: false,
       title: 'showMovie',
       dll: false,
-      
+
       routes: {
         exclude: [
           /models\//,

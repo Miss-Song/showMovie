@@ -13,3 +13,172 @@
   color: white;
   margin: 0;
 }
+.dbnavmovie{
+  position: relative;
+  background-color: #f0f3f5;
+  width: 100%;
+  min-width: 1040px;
+  overflow: hidden;
+  zoom: 1;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #e5ebe4;
+}
+.navwrap{
+  border-bottom: 1px solid #e5ebe4;
+}
+.navprimary{
+  width: 1040px;
+  margin: 0 auto;
+  overflow: visible !important;
+  position: relative;
+  padding: 10px 0 5px;
+  zoom: 1;
+  font-size: 13px;
+}
+ .navlogo{
+  float: left;
+  height: 56px;
+  width: 145px;
+  margin: 0 13px 0 0;
+  background: url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/lg_movie_a12_2.png) no-repeat 0 12px;
+}
+.navsearch{
+  font-size: 13px;
+}
+.nav-search fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    position: static;
+}
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    margin-bottom: 15px;
+}
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    margin-bottom: 15px;
+    border: none;
+}
+.navs-earch fieldset {
+
+    padding: 0;
+    margin: 0;
+    position: static;
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+}
+fieldset legend {
+  color: #666;
+  padding: 0 5px;
+  visibility: hidden;
+}
+legend {
+  display: block;
+  padding-inline-start: 2px;
+  padding-inline-end: 2px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+.navsearch label {
+  position: absolute;
+  left: 11px;
+  top: 10px;
+  line-height: 30px;
+  cursor: text;
+  color: #bbb;
+  width: auto;
+}
+label {
+  font-family: Tahoma;
+  vertical-align: middle;
+}
+.inp {
+  background-image: url(../assets/nav_mv_bg.png);
+}
+.inp {
+  float: left;
+  width: 470px;
+  height: 34px;
+  text-align: center;
+  margin-right: -3px;
+  cursor: text;
+}
+.inp input {
+  background: #fff;
+  width: 96%;
+  margin: 0;
+  text-align: left;
+  height: 30px;
+  padding-left: 10px;
+
+  outline: none;
+}
+.navsearch input {
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  vertical-align: middle;
+}
+.inpbtn {
+  position: relative;
+  left: -1px;
+  width: 37px;
+  height: 34px;
+  zoom: 1;
+  overflow: hidden;
+}
+.inpbtn input {
+  background: url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/nav_mv_bg.png?s=1) no-repeat 0 -40px;
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+  padding: 35px 0 0 0;
+  overflow: hidden;
+  color: transparent;
+  cursor: pointer;
+}
+.navsecondary {
+  width: 1040px;
+  margin: 0 auto;
+  padding-bottom: 0;
+  overflow: hidden;
+  zoom: 1;
+}
+.navsecondary .navitems {
+  float: none;
+  zoom: 1;
+  font-size: 14px;
+}
+.navsecondary ul {
+  margin: 9px 0;
+}
+.navsecondary li {
+  display: inline;
+  margin-right: 25px;
+}
+.movieannual2018{
+  position: absolute;
+  width: 186px;
+  height: 96px;
+  top: 10px;
+  left: 50%;
+  margin-left: 200px;
+  background: url(../assets/annual_2018.png) center/contain no-repeat;
+}
+.dbnavmovie a:link, .dbnavmovie a:visited {
+  color: #27a;
+}
+ .dbnavmovie a:hover {
+  color: #FFF;
+  background-color: #27a
+}
