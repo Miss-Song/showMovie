@@ -30,7 +30,8 @@ export function getMovieReviews(params){
     url: `https://ticket-api-m.mtime.cn/movie/hotComment.api?movieId=${params.movieId}`
   })
   .then(res=>{
-    console.log(res)
+    // console.log(res.data.data.mini.list)
+    return res.data.data.mini.list
   })
   .catch(err=>{
     console.log(err)
