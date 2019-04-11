@@ -4,12 +4,6 @@ import { Button, Icon } from 'antd'
 import { getMovieDetails, getMovieReviews } from '../../services/movies'
 
 
-
-
-
-
-
-
 function Review() {
 	const [wordNum, setWordNum] = useState({
 		num: 0
@@ -18,7 +12,7 @@ function Review() {
 	const [content, setcontent] = useState({
 		reviewData: ''
 	})
-const [publish,setPublish]=useState(false)
+	const [publish, setPublish] = useState(false)
 	/**
 	 * 评论框内容长度
 	 * @param {*} e 事件对象
@@ -36,7 +30,7 @@ const [publish,setPublish]=useState(false)
 	 */
 	var commitReviewHandle = (e) => {
 		let val = document.getElementsByTagName('textarea')[0].value;
-		if(val !== ''){
+		if (val !== '') {
 			setcontent({
 				reviewData: val
 			})
@@ -67,7 +61,7 @@ const [publish,setPublish]=useState(false)
 			<p className={styles.p_style + " " + styles.word_allReviews}>全部评论</p>
 
 			<div className={styles.allReviewsBox}>
-				<Other selfReview={publish?content.reviewData:''} />
+				<Other selfReview={publish ? content.reviewData : ''} />
 			</div>
 		</div>
 	)
@@ -103,16 +97,30 @@ class Other extends React.Component {
 			headImg: 'https://ws3.sinaimg.cn/large/005BYqpgly1g1ys33mp09j30tg0q7tse.jpg',
 			nickname: '金木研',
 			praiseCount: 0,
+			isPraise: false,
+			replyCount: 0,
 		}
 
-		if (val != '') {
+		if (val !== '') {
 			let arr = this.state.list;
 			arr.push(obj);
 			this.setState({
 				list: arr
 			})
 		}
+	}
 
+	praiseHandle(index) {
+		let arr = this.state.list;
+		if(arr[index].isPraise){
+			arr[index].praiseCount--;
+		}else{
+			arr[index].praiseCount++;
+		}
+		arr[index].isPraise = !arr[index].isPraise;
+		this.setState({
+			list: arr
+		})
 	}
 
 	render() {
@@ -136,13 +144,12 @@ class Other extends React.Component {
 
 									<div className={styles.praiseBox}>
 										<span className={styles.praise}>
-											<Icon type="up" className={styles.praiseIcon} />
+											<Icon type="like" onClick={()=>{this.praiseHandle(index)}} className={styles.praiseIcon + ' ' + (this.state.list[index].isPraise && styles.clicked)} />
 											<span>{item.praiseCount || 0}</span>
 										</span>
 
 										<span className={styles.praise}>
-											<Icon type="down" className={styles.praiseIcon} />
-											<span>{this.state.praiseCount || 0}</span>
+											<span className={styles.reply}>{'评论（'+ this.state.praiseCount+'）'}</span>
 										</span>
 									</div>
 								</div>
@@ -188,6 +195,5 @@ function index(props) {
 		</div>
 	)
 }
-
 
 export default index
