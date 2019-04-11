@@ -3,6 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { Button, Icon } from 'antd'
 import { getMovieDetails, getMovieReviews } from '../../services/movies'
 
+
+
+
+
+
+
+
 function Review() {
 	const [wordNum, setWordNum] = useState({
 		num: 0
@@ -11,12 +18,13 @@ function Review() {
 	const [content, setcontent] = useState({
 		reviewData: ''
 	})
-
+const [publish,setPublish]=useState(false)
 	/**
 	 * 评论框内容长度
 	 * @param {*} e 事件对象
 	 */
 	var changeHandle = (e) => {
+		setPublish(false)
 		setWordNum({
 			num: e.target.value.length
 		})
@@ -26,10 +34,18 @@ function Review() {
 	 * 提交评论
 	 * @param {*} e 事件对象
 	 */
-	var commitReviewHandle = (e)=>{
-		setcontent({
-			reviewData: document.getElementsByTagName('textarea')[0].value
-		})
+	var commitReviewHandle = (e) => {
+		let val = document.getElementsByTagName('textarea')[0].value;
+		if(val !== ''){
+			setcontent({
+				reviewData: val
+			})
+			document.getElementsByTagName('textarea')[0].value = '';
+			setWordNum({
+				num: 0
+			})
+			setPublish(true)
+		}
 	}
 
 	return (
@@ -51,102 +67,113 @@ function Review() {
 			<p className={styles.p_style + " " + styles.word_allReviews}>全部评论</p>
 
 			<div className={styles.allReviewsBox}>
-				<Other selfReview = {content.reviewData}/>
+				<Other selfReview={publish?content.reviewData:''} />
 			</div>
 		</div>
 	)
 }
 
-function Other(props) {
-	const [reviews, setReviews] = useState({
-		list: [],
-		praiseCount: 0,
-	})
+class Other extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			list: [],
+			praiseCount: 0,
+		}
+	}
 
-	useEffect(() => {
+	componentDidMount() {
 		getMovieReviews({
 			movieId: 125805
 		})
-		.then(res => {
-			setReviews({
-				list: res,
-				praiseCount: 0
+			.then(res => {
+				this.setState({
+					list: res,
+					praiseCount: 0
+				})
+				console.log(res)
 			})
-			console.log(res)
-		})
+	}
 
-	}, [])
+	componentWillReceiveProps(next) {
+		let val = next.selfReview
+		let obj = {
+			commentDate: Date.now(),
+			content: val,
+			headImg: 'https://ws3.sinaimg.cn/large/005BYqpgly1g1ys33mp09j30tg0q7tse.jpg',
+			nickname: '金木研',
+			praiseCount: 0,
+		}
 
-	// componentWillReceiveProps(nextProps){
-	// 	let obj = {
-	// 		commentDate: Date.now(),
-	// 		content: nextProps.selfReview,
-	// 		headImg: '',
-	// 		nickname: '我自己',
-	// 		praiseCount: 0,
-	// 	}
+		if (val != '') {
+			let arr = this.state.list;
+			arr.push(obj);
+			this.setState({
+				list: arr
+			})
+		}
 
-	// 	let arr = reviews.list;
-	// 	arr.push(obj);
-	// 	setReviews({list: arr})
-	// }
+	}
 
-	return (
-		<div className={styles.allReviews}>
-			{reviews.list.length > 0 ? reviews.list.map((item, index) => {
-				return (
-					<div key={index} className={styles.item_container}>
-						<div>
-							<figure className={styles.headImg}>
-								<img src={item.headImg} />
-							</figure>
+	render() {
+		return (
+			<div className={styles.allReviews}>
+				{this.state.list.length > 0 ? this.state.list.map((item, index) => {
+					return (
+						<div key={index} className={styles.item_container}>
+							<div>
+								<figure className={styles.headImg}>
+									<img src={item.headImg} />
+								</figure>
 
-							<div className={styles.user_item}>
-								<div className={styles.nicknameBox}>
-									<span className={styles.nickname}>{item.nickname}</span>
-									<span className={styles.reviewData}>{item.commentDate}</span> {/* TODO: */}
-								</div>
+								<div className={styles.user_item}>
+									<div className={styles.nicknameBox}>
+										<span className={styles.nickname}>{item.nickname}</span>
+										<span className={styles.reviewData}>{item.commentDate}</span> {/* TODO: */}
+									</div>
 
-								<p className={styles.p_style}>{item.content}</p>
+									<p className={styles.p_style}>{item.content}</p>
 
-								<div className={styles.praiseBox}>
-									<span className={styles.praise}>
-										<Icon type="up" className={styles.praiseIcon}/>
-										<span>{item.praiseCount || 0}</span>
-									</span>
+									<div className={styles.praiseBox}>
+										<span className={styles.praise}>
+											<Icon type="up" className={styles.praiseIcon} />
+											<span>{item.praiseCount || 0}</span>
+										</span>
 
-									<span className={styles.praise}>
-										<Icon type="down" className={styles.praiseIcon}/>
-										<span>{reviews.praiseCount || 0}</span>
-									</span>
+										<span className={styles.praise}>
+											<Icon type="down" className={styles.praiseIcon} />
+											<span>{this.state.praiseCount || 0}</span>
+										</span>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				)
-			}) : <span className={styles.noReviews}>暂无评论</span>
-			}
-		</div>
-	)
+					)
+				}) : <span className={styles.noReviews}>暂无评论</span>
+				}
+			</div>
+		)
+	}
 }
 
-function index() {
+function index(props) {
 	const [movies, setMovies] = useState({
 		video: '',
-		data: {}
+		data: {},
 	})
 
 	useEffect(() => {
 		getMovieDetails({
+			// locationId: props.location.params.locationId,
+			// movieId: props.location.params.movieId
 			locationId: 290,
-			movieId: 125805
+			movieId: 125805,
 		})
 			.then(res => {
 				setMovies({
 					video: res.data.data.basic.video.url
 				})
 			})
-
 	}, [])
 
 
