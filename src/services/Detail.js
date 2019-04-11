@@ -17,3 +17,9 @@ export function fetchCelebrities(MID){
     url:`https://api-m.mtime.cn/Movie/MovieCreditsWithTypes.api?movieId=${MID}`
   })
 }
+
+export function fetchMovieReview(MID){
+  return post('/api/v2/proxy',{
+    url:`https://ticket-api-m.mtime.cn/movie/hotComment.api?movieId=${MID}`
+  })
+}

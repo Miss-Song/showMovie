@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 //import Link from 'umi/link'//跳转插件
 import router from 'umi/router';
 import { connect } from 'dva'
-import { Card, Col, Row, Button, Icon, List, Typography } from 'antd'
+import { Card, Col, Row, Button, Icon, List, Typography,Avatar } from 'antd'
 import styles from './css/detail.css'
 import celebrities from './celebrities';
 function Detail(props) {
   console.log(props);
-  var { movieDetail } = props;
+  var { movieDetail, movieReview } = props;
   const [hidden, show] = useState({
     display: 'none'
   });
@@ -25,19 +25,20 @@ function Detail(props) {
       pathname: '/bb/aa',
       params: {
         movieId: movieDetail.boxOffice.movieId,
+        locationId: 290//到时候通过props.location.params.locationId获取
       },
     })
   }
-function tiaoCelebrities(){
-  router.push({
-    pathname:'celebrities',
-    params:{
-      movieId: movieDetail.boxOffice.movieId,
-      movieName:movieDetail.basic.name,
-      locationId:290////到时候通过props.location.params.locationId获取
-    }
-  })
-}
+  function tiaoCelebrities() {
+    router.push({
+      pathname: 'celebrities',
+      params: {
+        movieId: movieDetail.boxOffice.movieId,
+        movieName: movieDetail.basic.name,
+        locationId: 290////到时候通过props.location.params.locationId获取
+      }
+    })
+  }
   // 使用useEffect方法 执行类似于class定义组件的生命周期函数,
   //  第一个参数为一个function
   //  第二个参数为数组 表示当什么数据发生改变的时候触发
@@ -60,13 +61,20 @@ function tiaoCelebrities(){
     function loadDetail() {
       props.dispatch({
         type: 'movieDetail/loadMovieDetail',
-        movieId:217896,//到时候通过props.location.params.movieId获取
-        locationId:290////到时候通过props.location.params.locationId获取
+        movieId: 217896,//到时候通过props.location.params.movieId获取
+        locationId: 290////到时候通过props.location.params.locationId获取
       })
     }
+    function loadmovieReview() {
+      props.dispatch({
+        type: 'movieReview/loadmovieReview',
+        movieId: 217896,//到时候通过props.location.params.movieId获取
+      })
+    }
+    loadmovieReview();
     loadDetail();
   }, [])
-  if (movieDetail.basic && movieDetail.boxOffice) {
+  if (movieDetail.basic && movieDetail.boxOffice && movieReview.payload) {
     console.log('huojiang')
     return (
       <div style={{ background: '#ECECEC', padding: '30px' }}>
@@ -95,17 +103,17 @@ function tiaoCelebrities(){
         </Row>
         <Row gutter={16}>
           <Col span={32}>
-            <Card title='剧情介绍' bordered={false}>
+            <Card title={movieDetail.basic.name + '! 的剧情介绍'} bordered={false}>
               <p>{movieDetail.basic.story}</p>
             </Card>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col span={32} >
-            <Card title='演员' bordered={false} >
+            <Card title={movieDetail.basic.name + '! 的演职员'} bordered={false} style={{ position: 'relative' }}>
 
-              <div style={{position: 'relative'}}>
-              <Icon type="arrow-right"  className={styles.celebrities} onClick={tiaoCelebrities}/>
+              <div>
+              <Button type="primary" onClick={tiaoCelebrities} className={styles.celebrities}  icon="double-right">查看全部</Button>
                 {movieDetail.basic.actors.map((item, index) => {
                   if (index < Math.min(movieDetail.basic.actors.length, 6)) {
                     return (<figure key={index} style={{ display: 'inline-block' }}>
@@ -121,13 +129,13 @@ function tiaoCelebrities(){
                 })
                 }
               </div>
-              <Button onClick={() => changeMoreActor()}>查看更多/收起</Button>
+              {/* <Button onClick={() => changeMoreActor()}>查看更多演员/收起</Button> */}
             </Card>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col span={32}>
-            <Card title='预告片及剧照' bordered={false} >
+            <Card title={movieDetail.basic.name + '! 的预告片及剧照'} bordered={false} >
 
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {/*  <Link to='/bb/aa' style={{ width: Math.floor(1 / (movieDetail.basic.stageImg.list.length + 1) * 100) + '%' }}> */}
@@ -154,18 +162,37 @@ function tiaoCelebrities(){
         </Row>
         <Row gutter={16}>
           <Col span={32}>
-            <Card title='获奖情况' bordered={false} >
-                { movieDetail.basic.award.awardList.length>0?
-                   (<List
-                    bordered={false}
-                    dataSource={movieDetail.basic.award.awardList}
-                    renderItem={item => (<List.Item>{item}</List.Item>)}
-                  />)
+            <Card title={movieDetail.basic.name + '! 的获奖情况'} bordered={false} >
+              {movieDetail.basic.award.awardList.length > 0 ?
+                (<List
+                  bordered={false}
+                  dataSource={movieDetail.basic.award.awardList}
+                  renderItem={item => (<List.Item>{item}</List.Item>)}
+                />)
                 : (<List
                   bordered={false}
                   dataSource={['暂未获奖']}
                   renderItem={item => (<List.Item><Typography.Text mark>[{movieDetail.basic.name}]</Typography.Text> {item}</List.Item>)}
                 />)}
+            </Card>
+          </Col>
+        </Row>
+        <Row gutter={16}>
+          <Col span={32}>
+            <Card title={movieDetail.basic.name + '! 的短评'} bordered={false} >
+                  <List
+                  itemLayout="horizontal"
+                  dataSource={movieReview.payload}
+                  renderItem={item => (
+                    <List.Item>
+                      <List.Item.Meta
+                        avatar={<Avatar src={item.headImg} />}
+                        title={item.nickname+new Date(item.commentDate).toLocaleDateString()}
+                        description={item.content}
+                      />
+                    </List.Item>
+                  )}
+                />
             </Card>
           </Col>
         </Row>

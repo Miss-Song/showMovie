@@ -13,6 +13,15 @@ function Celebrities(props) {
     mid = props.location.params.movieId;
     lid=props.location.params.locationId;
   }
+  function tiao() {
+    router.push({
+      pathname: '/bb/aa',
+      params: {
+        movieId: movieDetail.boxOffice.movieId,
+        locationId:290// 到时候通过props.location.params.locationId获取
+      },
+    })
+  }
   useEffect(() => {
     console.log('loading celebrities  from server...')
     function actorFetch() {
@@ -77,7 +86,7 @@ function Celebrities(props) {
           </Col>
           <Col span={9}>
           <Button type="primary" onClick={tiaoDetail} style={{backgroundColor:'rgb(124, 142, 189)'}} icon="double-right">去{movieDetail.basic.name}的页面</Button>
-          <Card title={movieDetail.basic.name} bordered={false} onClick={()=>{alert('nini')}}>
+          <Card title={movieDetail.basic.name} bordered={false}>
               <div style={{ display: 'flex' }}>
                 <div
                   style={{ display: 'flex', justifyContent: 'space-around' }}
@@ -95,6 +104,7 @@ function Celebrities(props) {
                   </div>
                 </div>
               </div>
+              <Button icon="play-circle" type="primary" onClick={tiao} style={{backgroundColor:'rgb(124, 142, 189)'}}>预告片</Button>
             </Card>
           </Col>
         </Row>
