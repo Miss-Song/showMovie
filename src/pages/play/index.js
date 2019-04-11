@@ -137,7 +137,7 @@ class Other extends React.Component {
 								<div className={styles.user_item}>
 									<div className={styles.nicknameBox}>
 										<span className={styles.nickname}>{item.nickname}</span>
-										<span className={styles.reviewData}>{item.commentDate}</span> {/* TODO: */}
+										<span className={styles.reviewData}>{(new Date(item.commentDate)).toLocaleString() }</span> {/* TODO: */}
 									</div>
 
 									<p className={styles.p_style}>{item.content}</p>
