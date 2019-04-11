@@ -23,13 +23,13 @@ function index() {
 	useEffect(()=>{
 		getMovieDetails({
 			locationId:290,
-			movieId:125805
+			movieId:125806
 		}).then(res=>{
 			setMovies({
 				video:res.data.data.basic.video.url
 			})
-		})
-		
+    })
+
 	},[])
 
 
