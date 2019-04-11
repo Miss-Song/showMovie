@@ -1,0 +1,159 @@
+.video {
+	width: 80%;
+	height: 600px;
+	margin-left: 10%;
+	outline: none
+}
+
+.bg000 {
+	background: #000;
+	margin-top: -40px;
+}
+
+.wordNum {
+	float: right;
+	width: 58px;
+	margin-right: 30px;
+	color: #852;
+	font-style: italic;
+}
+
+.container {
+	width: 80%;
+	margin: 10px auto;
+	padding: 15px 0;
+}
+
+.tips {
+	font-size: 18px;
+	color: rgb(48, 111, 226);
+	margin-bottom: 6px;
+	text-indent: 6px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif
+}
+
+.txt_review {
+	text-indent: 8px;
+	font-family: '宋体';
+	min-height: 70px;
+	margin: 0 auto;
+	padding: 8px;
+	box-sizing: border-box;
+	line-height: 16px;
+	font-size: 14px;
+	border: 2px solid #d4d9dd;
+	box-shadow: inset 0 3px 3px #ebebeb;
+	outline: 0;
+	resize: vertical;
+	overflow: hidden;
+}
+
+.txt_review:hover {
+	border: 2px solid rgba(42, 55, 235, 0.5)
+}
+
+.p_style {
+	margin: 0;
+	padding: 0;
+	color: #333;
+}
+
+.word_allReviews {
+	margin-top: 10px;
+	font-size: 20px;
+	color: #333;
+	border-bottom: .5px solid #333;
+	width: 120px;
+	padding: 0 10px;
+}
+
+.allReviewsBox {
+	width: 100%;
+	min-height: 80px;
+	border-top: 0.5px solid rgba(150, 150, 150, 0.8);
+	padding-top: 10px;
+}
+
+.nicknameBox {
+	margin: 5px 0;
+}
+
+.noReviews {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	font-size: 20px;
+	text-align: center;
+	padding: 20px;
+}
+
+.item_container {
+	position: relative;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.headImg {
+	width: 60px;
+	padding: 5px;
+	float: left;
+	margin-right: 10px;
+}
+
+.headImg img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.user_item {
+	overflow: hidden;
+	zoom: 1;
+}
+
+.nickname {
+	padding-right: 8px;
+	font-size: 16px;
+	color: #4788dd;
+	font-weight: bold;
+}
+
+.reviewData {
+	font-size: 12px;
+	color: #9e9a9a;
+}
+
+.praiseBox {
+	margin: 6px 0 8px -8px;
+}
+
+.praiseIcon {
+	font-size: 16px;
+	color: #ddd;
+	margin-right: 3px;
+}
+
+.reply {
+	font-size: 13px;
+	color: #666;
+	margin-right: 3px;
+}
+
+.reply:hover {
+	color: #ff3939;
+}
+
+.praiseIcon:hover {
+	color: #ff3939;
+}
+
+.clicked {
+	color: #ff3939;
+}
+
+.praise {
+	padding: 0 8px;
+}
