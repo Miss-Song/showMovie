@@ -55,6 +55,7 @@ function BasicLayout(props) {
     </div>
     {props.children}
     </div>
+
   );
 }
 export default  BasicLayout;

@@ -26,11 +26,28 @@ export function getMovieDetails(params) {
  * @param {*} params 请求参数
  */
 export function getMovieReviews(params){
-  return post('https://api.cat-shop.penkuoer.com/api/v2/proxy', {              
+  return post('https://api.cat-shop.penkuoer.com/api/v2/proxy', {
     url: `https://ticket-api-m.mtime.cn/movie/hotComment.api?movieId=${params.movieId}`
   })
   .then(res=>{
     console.log(res)
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+}
+
+/**
+ * 获取正在热映
+ * @param {*} params 请求参数
+ */
+export function getHotMovie(params){
+  return post('https://api.cat-shop.penkuoer.com/api/v2/proxy', {
+    url: `https://api-m.mtime.cn/PageSubArea/HotPlayMovies.api?locationId=${params.locationId}`
+  })
+  .then(res=>{
+    // console.log(res)
+    return res
   })
   .catch(err=>{
     console.log(err)
