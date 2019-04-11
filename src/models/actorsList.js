@@ -1,12 +1,12 @@
-import { fetchMovieDetail } from '../services/Detail'
+import { fetchCelebrities } from '../services/Detail'
 export default {
-  namespace: 'movieDetail',
+  namespace: 'Celebrities',
   state: {
 
   },
   //同步操作
   reducers: {
-    'save'(state, { payload }) {
+    'save'(state,  payload ) {
       return { ...state, ...payload }
     }
   },
@@ -17,14 +17,13 @@ call：执行异步函数
 put：发出一个 Action，类似于 dispatch
    *  */
   effects:{
-    *loadMovieDetail(action,{call,put}){
+    *loadCelebrities(action,{call,put}){
       console.log(action);
-      const result=yield call(fetchMovieDetail,action.locationId,action.movieId);
-      /*  const result=yield call(fetchMovieDetail,[290,217896]); */
-      console.log(result.data.data);
+      const result=yield call(fetchCelebrities,action.movieId);
+      console.log(result.data.types);
       yield put({
         type:'save',
-        payload:result.data.data
+        payload:result.data.types
       });
     }
   }

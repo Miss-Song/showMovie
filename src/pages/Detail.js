@@ -4,13 +4,13 @@ import router from 'umi/router';
 import { connect } from 'dva'
 import { Card, Col, Row, Button, Icon, List, Typography } from 'antd'
 import styles from './css/detail.css'
+import celebrities from './celebrities';
 function Detail(props) {
   console.log(props);
   var { movieDetail } = props;
   const [hidden, show] = useState({
     display: 'none'
   });
-  // const [movie, viewMovie] = useState();
   function tiao() {
     /* router.push({
       pathname: '/bb/aa',
@@ -28,7 +28,16 @@ function Detail(props) {
       },
     })
   }
-
+function tiaoCelebrities(){
+  router.push({
+    pathname:'celebrities',
+    params:{
+      movieId: movieDetail.boxOffice.movieId,
+      movieName:movieDetail.basic.name,
+      locationId:290////到时候通过props.location.params.locationId获取
+    }
+  })
+}
   // 使用useEffect方法 执行类似于class定义组件的生命周期函数,
   //  第一个参数为一个function
   //  第二个参数为数组 表示当什么数据发生改变的时候触发
@@ -51,6 +60,8 @@ function Detail(props) {
     function loadDetail() {
       props.dispatch({
         type: 'movieDetail/loadMovieDetail',
+        movieId:217896,//到时候通过props.location.params.movieId获取
+        locationId:290////到时候通过props.location.params.locationId获取
       })
     }
     loadDetail();
@@ -90,10 +101,11 @@ function Detail(props) {
           </Col>
         </Row>
         <Row gutter={16}>
-          <Col span={32}>
-            <Card title='演员' bordered={false}>
+          <Col span={32} >
+            <Card title='演员' bordered={false} >
 
-              <div>
+              <div style={{position: 'relative'}}>
+              <Icon type="arrow-right"  className={styles.celebrities} onClick={tiaoCelebrities}/>
                 {movieDetail.basic.actors.map((item, index) => {
                   if (index < Math.min(movieDetail.basic.actors.length, 6)) {
                     return (<figure key={index} style={{ display: 'inline-block' }}>
@@ -147,7 +159,7 @@ function Detail(props) {
                    (<List
                     bordered={false}
                     dataSource={movieDetail.basic.award.awardList}
-                    renderItem={item => (<List.Item><Typography.Text mark>[ITEM]</Typography.Text> {item}</List.Item>)}
+                    renderItem={item => (<List.Item>{item}</List.Item>)}
                   />)
                 : (<List
                   bordered={false}

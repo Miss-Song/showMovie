@@ -8,7 +8,6 @@ figure{
 
 }
 .bofang{
- display:block;
  position:absolute;
  top:50%;
  left:50%;
@@ -20,6 +19,31 @@ figure{
  -ms-transform:translate(-50%,-50%);
  -o-transform:translate(-50%,-50%);
 }
-li{
-  list-style: none;
+.celebrities{
+  position:absolute;
+  top:50%;
+  right:0;
+  color:#ccc;
+  font-size:2rem;
+  transform: translate(0,-50%);
+  -webkit-transform: translate(0,-50%);
+  -moz-transform: translate(0,-50%);
+  -ms-transform: translate(0,-50%);
+  -o-transform: translate(0,-50%);
 }
+.metap>div:nth-of-type(1){
+width:30%;
+height:30%;
+}
+.tupian .bigPic{
+  width:100%;
+  height:10rem;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+
+
+
