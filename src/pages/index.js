@@ -1,11 +1,26 @@
 import styles from './index.css';
 import React, { useState, useEffect } from 'react'
 import { getHotMovie } from '../services/movies'
-import { Card ,Button} from 'antd';
-import { ButtonToolbar} from 'react-bootstrap';
+import { Card ,Button,Menu, Dropdown, Icon} from 'antd';
+
 const { Meta } = Card;
 
 function HotMovies() {
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">1st menu item</a>
+      </Menu.Item>
+      <Menu.Item>
+        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">2nd menu item</a>
+      </Menu.Item>
+      <Menu.Item>
+        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">3rd menu item</a>
+      </Menu.Item>
+    </Menu>
+  );
+
   const [HotMovies, setHotMovies] = useState({
     a: [],
     b: {}
@@ -23,26 +38,16 @@ function HotMovies() {
       })
 
   }, [])
-  // function a(){
-  //   var a = document.getElementsByClassName('list');
-  //   setInterval({
-  //     a.style.left =
-  //   },2000)
-  // }
+
   return (
     <div>
-< ButtonToolbar >
-  < Button  variant = "primary "  > Primary </ Button >
-  < Button  variant = " secondary " > Secondary </ Button >
-  < Button  variant = " success " > Success </ Button >
-  < Button  variant = "warning " >警告 </ Button>
-  <Button  variant = " danger " > Danger </ Button >
-  < Button  variant =" info " > Info </ Button >
-  < Button  variant = " light  "> Light </ Button >
-  < Button  variant = "dark " > Dark </ Button >
-
-</ ButtonToolbar > ;
-      <Button>按钮</Button><Button>按钮</Button>
+      <div>
+      <Dropdown overlay={menu}>
+    <a className="ant-dropdown-link" href="#">
+      Hover me <Icon type="down" />
+    </a>
+  </Dropdown>,
+      </div>
       <div className={styles.HotMoviesList}>
         <ul className={styles.list} >
           {HotMovies.a.map(item => {

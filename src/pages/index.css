@@ -1,18 +1,13 @@
 .HotMoviesList{
   width: 1040px;
   height: 500px;
-  overflow: hidden;
-  position: relative;
-}
-.list{
-  width: 9999999999px;
-  position: absolute;
-  left: 0;
+
 }
 .list li{
   list-style: none;
   float: left;
-
+  margin-left: 10px;
+  margin-bottom: 20px
 }
 .list img {
   height: 340px;
