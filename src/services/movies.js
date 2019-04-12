@@ -62,7 +62,7 @@ export function getRegion(){
     url: `https://api-m.mtime.cn/Showtime/HotCitiesByCinema.api`
   })
   .then(res=>{
-    // console.log(res)
+    return res
   }
   )}
 /**

@@ -16,7 +16,6 @@ function Aeras(props) {
   useEffect(() => {
     getRegion()
       .then(res => {
-        console.log(222222, res.data.p)
         setRegion({
           aera: res.data.p.slice(200, 300)
         })
