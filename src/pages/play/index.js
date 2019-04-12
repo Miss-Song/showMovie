@@ -174,9 +174,7 @@ function index(props) {
 	useEffect(() => {
 		getMovieDetails({
 			locationId: props.location.params.locationId,
-			movieId: props.location.params.movieId
-			// locationId: 290,
-			// movieId: 125805,
+			movieId: props.location.params.movieId,
 		})
 		.then(res => {
 			setMovies({
@@ -192,7 +190,7 @@ function index(props) {
 				<video className={styles.video} controls src={movies.video}></video>
 			</div>
 			<div className={styles.container}>
-				<Review  movieId = {/* props.location.params.movieId */1}/>
+				<Review  movieId = {props.location.params.movieId}/>
 			</div>
 		</div>
 	)
