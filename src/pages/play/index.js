@@ -4,7 +4,7 @@ import { Button, Icon } from 'antd'
 import { getMovieDetails, getMovieReviews } from '../../services/movies'
 
 
-function Review() {
+function Review(props) {
 	const [wordNum, setWordNum] = useState({
 		num: 0
 	})
@@ -61,7 +61,7 @@ function Review() {
 			<p className={styles.p_style + " " + styles.word_allReviews}>全部评论</p>
 
 			<div className={styles.allReviewsBox}>
-				<Other selfReview={publish ? content.reviewData : ''} />
+				<Other selfReview={publish ? content.reviewData : ''} movieId = { props.movieId} />
 			</div>
 		</div>
 	)
@@ -77,8 +77,10 @@ class Other extends React.Component {
 	}
 
 	componentDidMount() {
+		console.log('props=',this.props)
 		getMovieReviews({
-			movieId: 125805
+			movieId: 125805/* props.movieId */,
+
 		})
 			.then(res => {
 				this.setState({
@@ -176,11 +178,11 @@ function index(props) {
 			locationId: 290,
 			movieId: 125805,
 		})
-			.then(res => {
-				setMovies({
-					video: res.data.data.basic.video.url
-				})
+		.then(res => {
+			setMovies({
+				video: res.data.data.basic.video.url
 			})
+		})
 	}, [])
 
 
@@ -190,7 +192,7 @@ function index(props) {
 				<video className={styles.video} controls src={movies.video}></video>
 			</div>
 			<div className={styles.container}>
-				<Review />
+				<Review  movieId = {/* props.location.params.movieId */1}/>
 			</div>
 		</div>
 	)
