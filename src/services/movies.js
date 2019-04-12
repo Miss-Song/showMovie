@@ -54,3 +54,19 @@ export function getHotMovie(params){
     console.log(err)
   })
 }
+/**
+ * 获取地区
+ * @param {*} params 请求参数
+ */
+export function getRegion(){
+  return post('https://api.cat-shop.penkuoer.com/api/v2/proxy', {
+    url: `https://api-m.mtime.cn/Showtime/HotCitiesByCinema.api`
+  })
+  .then(res=>{
+    // console.log(res)
+    return res
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+}

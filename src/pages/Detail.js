@@ -22,7 +22,7 @@ function Detail(props) {
     /* 以上两种方式参数都会体现在地址栏中，下面的这一种不会体现 */
 
     router.push({
-      pathname: '/bb/aa',
+      pathname: '/play',
       params: {
         movieId: movieDetail.boxOffice.movieId,
         locationId: 290//到时候通过props.location.params.locationId获取
@@ -61,14 +61,14 @@ function Detail(props) {
     function loadDetail() {
       props.dispatch({
         type: 'movieDetail/loadMovieDetail',
-        movieId: 217896,//到时候通过props.location.params.movieId获取
+        movieId: props.location.params.movieId,//到时候通过props.location.params.movieId获取
         locationId: 290////到时候通过props.location.params.locationId获取
       })
     }
     function loadmovieReview() {
       props.dispatch({
         type: 'movieReview/loadmovieReview',
-        movieId: 217896,//到时候通过props.location.params.movieId获取
+        movieId: props.location.params.movieId,//到时候通过props.location.params.movieId获取
       })
     }
     loadmovieReview();

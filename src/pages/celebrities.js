@@ -15,10 +15,10 @@ function Celebrities(props) {
   }
   function tiao() {
     router.push({
-      pathname: '/bb/aa',
+      pathname: '/play',
       params: {
         movieId: movieDetail.boxOffice.movieId,
-        locationId:290// 到时候通过props.location.params.locationId获取
+        locationId:props.location.params.locationId// 到时候通过props.location.params.locationId获取
       },
     })
   }
