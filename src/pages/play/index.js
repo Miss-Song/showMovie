@@ -79,7 +79,7 @@ class Other extends React.Component {
 	componentDidMount() {
 		console.log('props=',this.props)
 		getMovieReviews({
-			movieId: 125805/* props.movieId */,
+			movieId: this.props.movieId,
 
 		})
 			.then(res => {
