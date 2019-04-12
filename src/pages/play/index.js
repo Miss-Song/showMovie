@@ -173,10 +173,10 @@ function index(props) {
 
 	useEffect(() => {
 		getMovieDetails({
-			// locationId: props.location.params.locationId,
-			// movieId: props.location.params.movieId
-			locationId: 290,
-			movieId: 125805,
+			locationId: props.location.params.locationId,
+			movieId: props.location.params.movieId
+			// locationId: 290,
+			// movieId: 125805,
 		})
 		.then(res => {
 			setMovies({
