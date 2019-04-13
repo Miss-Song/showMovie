@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 //import Link from 'umi/link'//跳转插件
 import router from 'umi/router';
 import { connect } from 'dva'
-import { Card, Col, Row, Button, Icon, List, Typography,Avatar } from 'antd'
+import { Card, Col, Row, Button, Icon, List, Typography, Avatar } from 'antd'
 import styles from './css/detail.css'
 import celebrities from './celebrities';
 function Detail(props) {
@@ -11,6 +11,14 @@ function Detail(props) {
   const [hidden, show] = useState({
     display: 'none'
   });
+  var locationId = 290, movieId = 217896;
+  if (props.location.params) {
+    locationId = props.location.params.locationId;
+    movieId = props.location.params.movieId;
+  } else if (localStorage.getItem('locationId')&&localStorage.getItem('movieId')) {
+    locationId = localStorage.getItem('locationId');
+    movieId = localStorage.getItem('movieId');
+  }
   function tiao() {
     /* router.push({
       pathname: '/bb/aa',
@@ -22,10 +30,10 @@ function Detail(props) {
     /* 以上两种方式参数都会体现在地址栏中，下面的这一种不会体现 */
 
     router.push({
-      pathname: '/bb/aa',
+      pathname: '/play',
       params: {
-        movieId: movieDetail.boxOffice.movieId,
-        locationId: 290//到时候通过props.location.params.locationId获取
+        movieId,
+        locationId//到时候通过props.location.params.locationId获取
       },
     })
   }
@@ -33,9 +41,9 @@ function Detail(props) {
     router.push({
       pathname: 'celebrities',
       params: {
-        movieId: movieDetail.boxOffice.movieId,
+        movieId,
         movieName: movieDetail.basic.name,
-        locationId: 290////到时候通过props.location.params.locationId获取
+        locationId////到时候通过props.location.params.locationId获取
       }
     })
   }
@@ -61,8 +69,8 @@ function Detail(props) {
     function loadDetail() {
       props.dispatch({
         type: 'movieDetail/loadMovieDetail',
-        movieId: 217896,//到时候通过props.location.params.movieId获取
-        locationId: 290////到时候通过props.location.params.locationId获取
+        movieId,//到时候通过props.location.params.movieId获取
+        locationId////到时候通过props.location.params.locationId获取
       })
     }
     function loadmovieReview() {
@@ -113,7 +121,7 @@ function Detail(props) {
             <Card title={movieDetail.basic.name + '! 的演职员'} bordered={false} style={{ position: 'relative' }}>
 
               <div>
-              <Button type="primary" onClick={tiaoCelebrities} className={styles.celebrities}  icon="double-right">查看全部</Button>
+                <Button type="primary" onClick={tiaoCelebrities} className={styles.celebrities} icon="double-right">查看全部</Button>
                 {movieDetail.basic.actors.map((item, index) => {
                   if (index < Math.min(movieDetail.basic.actors.length, 6)) {
                     return (<figure key={index} style={{ display: 'inline-block' }}>
@@ -180,19 +188,19 @@ function Detail(props) {
         <Row gutter={16}>
           <Col span={32}>
             <Card title={movieDetail.basic.name + '! 的短评'} bordered={false} >
-                  <List
-                  itemLayout="horizontal"
-                  dataSource={movieReview.payload}
-                  renderItem={item => (
-                    <List.Item>
-                      <List.Item.Meta
-                        avatar={<Avatar src={item.headImg} />}
-                        title={item.nickname+new Date(item.commentDate).toLocaleDateString()}
-                        description={item.content}
-                      />
-                    </List.Item>
-                  )}
-                />
+              <List
+                itemLayout="horizontal"
+                dataSource={movieReview.payload}
+                renderItem={item => (
+                  <List.Item>
+                    <List.Item.Meta
+                      avatar={<Avatar src={item.headImg} />}
+                      title={item.nickname + new Date(item.commentDate).toLocaleDateString()}
+                      description={item.content}
+                    />
+                  </List.Item>
+                )}
+              />
             </Card>
           </Col>
         </Row>
