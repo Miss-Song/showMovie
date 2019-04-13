@@ -76,7 +76,7 @@ function Detail(props) {
     function loadmovieReview() {
       props.dispatch({
         type: 'movieReview/loadmovieReview',
-        movieId: 217896,//到时候通过props.location.params.movieId获取
+        movieId: props.location.params.movieId,//到时候通过props.location.params.movieId获取
       })
     }
     loadmovieReview();
