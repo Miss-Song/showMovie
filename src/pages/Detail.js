@@ -11,13 +11,16 @@ function Detail(props) {
   const [hidden, show] = useState({
     display: 'none'
   });
-  var locationId = 290, movieId = 217896;
+  var locationId = 290, movieId = 217896,movieName='功夫瑜伽';
+  if (localStorage.getItem('locationId')&&localStorage.getItem('movieId')&&localStorage.getItem('movieName')) {
+    locationId = localStorage.getItem('locationId');
+    movieId = localStorage.getItem('movieId');
+    movieName=localStorage.getItem('movieName');
+  }
   if (props.location.params) {
     locationId = props.location.params.locationId;
     movieId = props.location.params.movieId;
-  } else if (localStorage.getItem('locationId')&&localStorage.getItem('movieId')) {
-    locationId = localStorage.getItem('locationId');
-    movieId = localStorage.getItem('movieId');
+    movieName=props.location.params.movieName;
   }
   function tiao() {
     /* router.push({
@@ -42,7 +45,7 @@ function Detail(props) {
       pathname: 'celebrities',
       params: {
         movieId,
-        movieName: movieDetail.basic.name,
+        movieName,
         locationId////到时候通过props.location.params.locationId获取
       }
     })
@@ -76,7 +79,7 @@ function Detail(props) {
     function loadmovieReview() {
       props.dispatch({
         type: 'movieReview/loadmovieReview',
-        movieId: props.location.params.movieId,//到时候通过props.location.params.movieId获取
+        movieId,//到时候通过props.location.params.movieId获取
       })
     }
     loadmovieReview();

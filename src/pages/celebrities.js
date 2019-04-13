@@ -12,6 +12,9 @@ function Celebrities(props) {
   if (props.location.params) {
     mid = props.location.params.movieId;
     lid=props.location.params.locationId;
+  }else if(localStorage.getItem('locationId')&&localStorage.getItem('movieId')) {
+    lid = localStorage.getItem('locationId');
+    mid = localStorage.getItem('movieId');
   }
   function tiao() {
     router.push({

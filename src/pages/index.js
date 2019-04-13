@@ -8,12 +8,17 @@ const { Meta } = Card;
 
 
 function Aeras(props) {
-
+console.log(props)
   const [Region, setRegion] = useState({
     aera: '',
     locationId: 290
   })
   useEffect(() => {
+   /*  if(props){
+      setRegion({
+        locationId:props.locationId
+      })
+    } */
     getRegion()
       .then(res => {
         setRegion({
@@ -22,14 +27,17 @@ function Aeras(props) {
       })
 
   }, [])
-  const onClick = ({ key }) => {
+  function onClick(key){
+    console.log('key')
     props.abc(key)
+    localStorage.setItem('locationId',key);
+
     message.info(`当前城市为 ${key}`);
   };
   function Menus() {
-    return (<Menu onClick={onClick}>
+    return (<Menu>
       {Region.aera.map(items => {
-        return (<Menu.Item key={items.id}>{items.n}</Menu.Item>)
+        return (<Menu.Item onClick={()=>onClick(items.id)} key={items.id}>{items.n}</Menu.Item>)
       })}
     </Menu>)
   }
@@ -49,21 +57,26 @@ function Aeras(props) {
 function HotMovie(props) {
   console.log(props)
 
-  const [HotMovies, setHotMovies] = useState({
+  var [HotMovies, setHotMovies] = useState({
     a: [],
     b: {},
-    locationId: 290
+    lId: 290
   })
-
-
   useEffect(() => {
     //console.log(11111111111, HotMovies.movieId)
+   /*  if(localStorage.getItem('locationId')){
+      setHotMovies({...HotMovies,
+        lId:localStorage.getItem('locationId')
+      })
+    } */
+    console.log(HotMovies.lId)
     getHotMovie({
-      locationId: HotMovies.locationId,
+      locationId: HotMovies.lId,
     })
       .then(res => {
         console.log(res.data.movies)
-        setHotMovies({
+        localStorage.setItem('locationId',HotMovies.lId)
+        setHotMovies({...HotMovies,
           a: res.data.movies,
         })
       })
@@ -71,12 +84,17 @@ function HotMovie(props) {
 
 
 
-  function tiao(id, locationId) {
+  const tiao= (movieId,movieName) =>{
+    //localStorage.setItem('locationId',locationId);
+    localStorage.setItem('movieId',movieId);
+    localStorage.setItem('movieName',movieName);
+    console.log(movieId,HotMovies.lId,movieName)
     router.push({
       pathname: '/Detail',
       params: {
-        movieId: id,
-        locationId: HotMovies.locationId//到时候通过props.location.params.locationId获取
+        movieId,
+        locationId: HotMovies.lId,//到时候通过props.location.params.locationId获取
+        movieName
       },
     })
   }
@@ -90,22 +108,23 @@ function HotMovie(props) {
         console.log(res.data.movies)
         setHotMovies({
           a: res.data.movies,
-          locationId: props
+          lId: props
         })
       })
   }
   return (
     <div>
-      <Aeras abc={qqq} />
+      <Aeras abc={qqq}/*  locationId={HotMovies.locationId} *//>
       <div className={styles.HotMoviesList}>
         <ul className={styles.list} >
           {HotMovies.a.map((item,index) => {
+
             return (<li key={index}>
 
               <Card
                 hoverable
                 style={{ width: 240, height: 500 }}
-                cover={<img alt={item.actorName1} src={item.img} onClick={() => tiao(item.movieId)} />}
+                cover={<img alt={item.actorName1} src={item.img} onClick={() => tiao(item.movieId,item.titleCn)} />}
               >
                 <Meta
 
