@@ -62,13 +62,19 @@ function HotMovie(props) {
     b: {},
     lId: 290
   })
+ /*  if(localStorage.getItem('HotMovies-a')){
+    setHotMovies({
+      ...HotMovies,
+      a:JSON.parse(localStorage.getItem('HotMovies-a'))
+    })
+  } */
   useEffect(() => {
     //console.log(11111111111, HotMovies.movieId)
-   /*  if(localStorage.getItem('locationId')){
+    if(localStorage.getItem('locationId')){
       setHotMovies({...HotMovies,
         lId:localStorage.getItem('locationId')
       })
-    } */
+    }
     console.log(HotMovies.lId)
     getHotMovie({
       locationId: HotMovies.lId,
@@ -76,6 +82,7 @@ function HotMovie(props) {
       .then(res => {
         console.log(res.data.movies)
         localStorage.setItem('locationId',HotMovies.lId)
+     //   localStorage.setItem('HotMovies-a',JSON.stringify(res.data.movies));
         setHotMovies({...HotMovies,
           a: res.data.movies,
         })
