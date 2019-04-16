@@ -152,7 +152,7 @@ function Detail(props) {
                 {/*  <Link to='/bb/aa' style={{ width: Math.floor(1 / (movieDetail.basic.stageImg.list.length + 1) * 100) + '%' }}> */}
                 <div style={{ width: Math.floor(1 / (movieDetail.basic.stageImg.list.length + 1) * 100) + '%', position: 'relative' }}>
 
-                  <video style={{ backgroundColor: '#000', width: '100%' /* ,height:'12rem' */ }}>
+                  <video  style={{ backgroundColor: '#000', width: '100%' /* ,height:'12rem' */ }}>
                     <source src={movieDetail.basic.video.hightUrl} type="video/mp4" />
                     您的浏览器不支持 video 标签。
                 </video>{/* </Link> */}

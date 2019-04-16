@@ -187,7 +187,7 @@ function index(props) {
 	return (
 		<div>
 			<div className={styles.bg000}>
-				<video className={styles.video} controls src={movies.video}></video>
+				<video className={styles.video} controls preload="none" src={movies.video}></video>
 			</div>
 			<div className={styles.container}>
 				<Review  movieId = {props.location.params.movieId}/>
