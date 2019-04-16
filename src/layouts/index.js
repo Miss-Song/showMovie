@@ -74,8 +74,7 @@ function BasicLayout(props) {
             <a href=""></a>
           </div>
           <div className={styles.navsearch}>
-
-            <form action="https://movie.douban.com/subject_search" method="get">
+            <form action="" method="get">
               <fieldset>
                 <legend>搜索：</legend>
                 <label>

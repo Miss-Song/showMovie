@@ -22,28 +22,28 @@ console.log(props)
     getRegion()
       .then(res => {
         setRegion({
-          aera: res.data.p.slice(200, 300)
+          aera: res.data.p.slice(0, 50)
         })
       })
 
   }, [])
-  function onClick(key){
-    console.log('key')
-    props.abc(key)
-    localStorage.setItem('locationId',key);
+  function onClick(item){
+    // console.log(item)
+    props.abc(item)
+    localStorage.setItem('locationId',item);
 
-    message.info(`当前城市为 ${key}`);
+    message.info(`当前城市为 ${item.n}`);
   };
   function Menus() {
     return (<Menu>
       {Region.aera.map(items => {
-        return (<Menu.Item onClick={()=>onClick(items.id)} key={items.id}>{items.n}</Menu.Item>)
+        return (<Menu.Item onClick={()=>onClick(items)} key={items.id}>{items.n}</Menu.Item>)
       })}
     </Menu>)
   }
 
   return (
-    <div>
+    <div className={styles.aera}>
       <Dropdown overlay={Menus}>
         <a className="ant-dropdown-link" href="#">
          选择城市 <Icon type="down" />
@@ -130,14 +130,15 @@ function HotMovie(props) {
 
               <Card
                 hoverable
-                style={{ width: 240, height: 500 }}
+                style={{ width: 240, height: 460 }}
                 cover={<img alt={item.actorName1} src={item.img} onClick={() => tiao(item.movieId,item.titleCn)} />}
               >
+                <b><p>主演：{item.actorName1}&nbsp;&nbsp;&nbsp;{item.actorName2}</p></b>
                 <Meta
-
-                  title={item.movieId}
+                  title=""
                   description={item.commonSpecial}
                 />
+
               </Card>
 
             </li>)
